@@ -467,69 +467,72 @@ describe('POST /api/v1/results', () => {
                 }
             })
             .expect(200)
-            .post('/api/v1/results')
-            .send({
-                password: 'password'
-            })
-            .expect(200)
-            .expect([
-                [
-                    {
-                        answerToQuestion1: 'the first answer',
-                        answerToQuestion2: 'the second answer',
-                        answerToQuestion3: 'the third answer'
-                    }
-                ],
-                [
-                    {
-                        answerToQuestion1: 'the first answer',
-                        answerToQuestion2: 'the second answer',
-                        answerToQuestion3: 'the third answer'
-                    },
-                    {
-                        answerToQuestion1: 'another first answer',
-                        answerToQuestion2: 'another second answer',
-                        answerToQuestion3: 'another third answer'
-                    }
-                ],
-                [
-                    {
-                        answerToQuestion1: 'whose first answer',
-                        answerToQuestion2: 'whose second answer',
-                        answerToQuestion3: 'whose third answer'
-                    }
-                ]
-            ])
             .then(() => {
-                expect(data).toEqual({
-                    '123': [
-                        {
-                            answerToQuestion1: 'the first answer',
-                            answerToQuestion2: 'the second answer',
-                            answerToQuestion3: 'the third answer'
-                        }
-                    ],
-                    '456': [
-                        {
-                            answerToQuestion1: 'the first answer',
-                            answerToQuestion2: 'the second answer',
-                            answerToQuestion3: 'the third answer'
-                        },
-                        {
-                            answerToQuestion1: 'another first answer',
-                            answerToQuestion2: 'another second answer',
-                            answerToQuestion3: 'another third answer'
-                        }
-                    ],
-                    '789': [
-                        {
-                            answerToQuestion1: 'whose first answer',
-                            answerToQuestion2: 'whose second answer',
-                            answerToQuestion3: 'whose third answer'
-                        }
-                    ]
-                });
-                done();
+                request(app)
+                    .post('/api/v1/results')
+                    .send({
+                        password: 'password'
+                    })
+                    .expect(200)
+                    .expect([
+                        [
+                            {
+                                answerToQuestion1: 'the first answer',
+                                answerToQuestion2: 'the second answer',
+                                answerToQuestion3: 'the third answer'
+                            }
+                        ],
+                        [
+                            {
+                                answerToQuestion1: 'the first answer',
+                                answerToQuestion2: 'the second answer',
+                                answerToQuestion3: 'the third answer'
+                            },
+                            {
+                                answerToQuestion1: 'another first answer',
+                                answerToQuestion2: 'another second answer',
+                                answerToQuestion3: 'another third answer'
+                            }
+                        ],
+                        [
+                            {
+                                answerToQuestion1: 'whose first answer',
+                                answerToQuestion2: 'whose second answer',
+                                answerToQuestion3: 'whose third answer'
+                            }
+                        ]
+                    ])
+                    .then(() => {
+                        expect(data).toEqual({
+                            '123': [
+                                {
+                                    answerToQuestion1: 'the first answer',
+                                    answerToQuestion2: 'the second answer',
+                                    answerToQuestion3: 'the third answer'
+                                }
+                            ],
+                            '456': [
+                                {
+                                    answerToQuestion1: 'the first answer',
+                                    answerToQuestion2: 'the second answer',
+                                    answerToQuestion3: 'the third answer'
+                                },
+                                {
+                                    answerToQuestion1: 'another first answer',
+                                    answerToQuestion2: 'another second answer',
+                                    answerToQuestion3: 'another third answer'
+                                }
+                            ],
+                            '789': [
+                                {
+                                    answerToQuestion1: 'whose first answer',
+                                    answerToQuestion2: 'whose second answer',
+                                    answerToQuestion3: 'whose third answer'
+                                }
+                            ]
+                        });
+                        done();
+                    });
             });
     });
     it('should do nothing and reject incorrect password', (done) => {

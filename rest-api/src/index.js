@@ -1,7 +1,7 @@
 const express = require('express');
 const submissions = require('./submissions');
 const { checkFormat } = require('./formatObject');
-const submissionFormat = require('./submissionFormat');
+const { submissionFormat, retrievalFormat } = require('./formats');
 
 const app = express();
 
@@ -21,7 +21,28 @@ app.post('/api/v1/collector', (req, res) => {
         const collected = submissions.collect(req.body);
         return res.json(collected).status(200);
     }
-})
+});
+
+app.post('/api/v1/results', (req, res) => {
+    const verification = checkFormat(req.body).against(retrievalFormat);
+    if (verification.passed === false) {
+        delete verification.passed; // exclude from returned object
+        let error = 'Missing password';
+        if (req.body.password) {
+            error = 'Password must be a string';
+            if (typeof req.body.password === 'string') {
+                error = 'Incorrect password';
+            }
+        }
+        return res.status(400).json({
+            error,
+            ...verification
+        });
+    } else {
+        const results = submissions.anonymize();
+        return res.json(results).status(200);
+    }
+});
 
 // preparation for export
 
