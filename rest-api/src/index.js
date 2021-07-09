@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const submissions = require('./submissions');
 const { checkFormat } = require('./formatObject');
 const { submissionFormat, retrievalFormat } = require('./formats');
@@ -8,6 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(cors());
 
 app.post('/api/v1/collector', (req, res) => {
     const verification = checkFormat(req.body).against(submissionFormat);
