@@ -1,8 +1,8 @@
-const express = require('express');
-const cors = require('cors');
-const submissions = require('./submissions');
-const { checkFormat } = require('./formatObject');
-const { submissionFormat, retrievalFormat } = require('./formats');
+const express = require("express");
+const cors = require("cors");
+const submissions = require("./submissions");
+const { checkFormat } = require("./formatObject");
+const { submissionFormat, retrievalFormat } = require("./formats");
 
 const app = express();
 
@@ -11,13 +11,13 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors());
 
-app.post('/api/v1/collector', (req, res) => {
+app.post("/api/v1/collector", (req, res) => {
     const verification = checkFormat(req.body).against(submissionFormat);
     if (verification.passed === false) {
         delete verification.passed; // exclude from returned object
         return res.status(400).json({
-            error: 'Missing or incorrect fields',
-            ...verification
+            error: "Missing or incorrect fields",
+            ...verification,
         });
     } else {
         const collected = submissions.collect(req.body);
@@ -25,20 +25,20 @@ app.post('/api/v1/collector', (req, res) => {
     }
 });
 
-app.post('/api/v1/results', (req, res) => {
+app.post("/api/v1/results", (req, res) => {
     const verification = checkFormat(req.body).against(retrievalFormat);
     if (verification.passed === false) {
         delete verification.passed; // exclude from returned object
-        let error = 'Missing password';
+        let error = "Missing password";
         if (req.body.password) {
-            error = 'Password must be a string';
-            if (typeof req.body.password === 'string') {
-                error = 'Incorrect password';
+            error = "Password must be a string";
+            if (typeof req.body.password === "string") {
+                error = "Incorrect password";
             }
         }
         return res.status(400).json({
             error,
-            ...verification
+            ...verification,
         });
     } else {
         const results = submissions.anonymize();

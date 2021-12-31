@@ -2,7 +2,6 @@
 
 class DataType {
     constructor(description, hasInstance) {
-
         // a human-readable definition
         this.description = description;
 
@@ -11,7 +10,7 @@ class DataType {
     }
 
     // some built-in data types
-    static string = new DataType('string', val => typeof val === 'string');
+    static string = new DataType("string", (val) => typeof val === "string");
 }
 
 /**
@@ -109,7 +108,7 @@ function checkFormatAgainst(candidate, template) {
     candidate = objectify(candidate);
 
     // find extraneous properties of candidate
-    Object.getOwnPropertyNames(candidate).forEach(propName => {
+    Object.getOwnPropertyNames(candidate).forEach((propName) => {
         if (!template[propName]) {
             passed = false;
             copyProperty(candidate, propName, rejectedFields);
@@ -117,7 +116,7 @@ function checkFormatAgainst(candidate, template) {
     });
 
     // check all properties of template
-    Object.getOwnPropertyNames(template).forEach(propName => {
+    Object.getOwnPropertyNames(template).forEach((propName) => {
         const prop = template[propName];
         if (prop instanceof DataType) {
             // base case
@@ -128,11 +127,24 @@ function checkFormatAgainst(candidate, template) {
             }
         } else {
             // recursive case
-            const propVerification = checkFormatAgainst(candidate[propName], template[propName]);
+            const propVerification = checkFormatAgainst(
+                candidate[propName],
+                template[propName]
+            );
             if (propVerification.passed == false) {
                 passed = false;
-                copyProperty(propVerification, 'requiredFields', requiredFields, propName);
-                copyProperty(propVerification, 'rejectedFields', rejectedFields, propName);
+                copyProperty(
+                    propVerification,
+                    "requiredFields",
+                    requiredFields,
+                    propName
+                );
+                copyProperty(
+                    propVerification,
+                    "rejectedFields",
+                    rejectedFields,
+                    propName
+                );
             }
         }
     });
@@ -150,12 +162,11 @@ function checkFormatAgainst(candidate, template) {
 
 function checkFormat(candidate) {
     return {
-        against: (template) => checkFormatAgainst(candidate, template)
+        against: (template) => checkFormatAgainst(candidate, template),
     };
 }
 
 module.exports = {
     DataType,
-    checkFormat
-}
-
+    checkFormat,
+};

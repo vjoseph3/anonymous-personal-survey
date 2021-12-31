@@ -3,7 +3,7 @@
 // A database object for storing the survey submissions
 // Each property name is the ID of a submitter
 // Each property value is the chronological list of submissions from that submitter
-const data = ({});
+const data = {};
 
 /**
  * Returns an anonymized record of all known submissions
@@ -32,6 +32,5 @@ function collect(datum) {
 module.exports = {
     data,
     anonymize,
-    collect
+    collect,
 };
-

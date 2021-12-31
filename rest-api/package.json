@@ -1,21 +1,21 @@
 {
-  "name": "rest-api",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node src/index.js",
-    "test": "jest"
-  },
-  "author": "Joseph Vendryes",
-  "license": "ISC",
-  "dependencies": {
-    "big-integer": "^1.6.48",
-    "cors": "^2.8.5",
-    "express": "^4.17.1"
-  },
-  "devDependencies": {
-    "jest": "^27.0.6",
-    "supertest": "^6.1.3"
-  }
+    "name": "rest-api",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node src/index.js",
+        "test": "jest"
+    },
+    "author": "Joseph Vendryes",
+    "license": "ISC",
+    "dependencies": {
+        "big-integer": "^1.6.48",
+        "cors": "^2.8.5",
+        "express": "^4.17.1"
+    },
+    "devDependencies": {
+        "jest": "^27.0.6",
+        "supertest": "^6.1.3"
+    }
 }
