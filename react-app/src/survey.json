@@ -1,0 +1,30 @@
+[
+    {
+        "component": "Text",
+        "props": {
+            "prompt": "Here are some example survey questions. For this first question, a non-empty response is required.",
+            "required": true
+        }
+    },
+    {
+        "component": "MultipleChoice",
+        "props": {
+            "prompt": "Did you skip this question?",
+            "choices": ["No"],
+            "required": "opt-out"
+        }
+    },
+    {
+        "component": "MultipleChoice",
+        "props": {
+            "prompt": "Do you like surveys?",
+            "choices": ["Yes", "Sometimes", "No"]
+        }
+    },
+    {
+        "component": "Text",
+        "props": {
+            "prompt": "What is one feature you would like to see in a survey?"
+        }
+    }
+]
