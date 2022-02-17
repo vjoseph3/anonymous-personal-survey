@@ -19,13 +19,19 @@ describe("<GoodbyePage />", () => {
         const p = wrapper.find("p");
         expect(p).toHaveLength(1);
         expect(p.text()).toEqual(
-            "You can safely close this window, or" + "change and resubmit"
+            expect.stringMatching(
+                /^You can update your submission at any time at https?:\/\/.+\/some-specific-user\/submit/
+            )
         );
     });
     it("renders a link to resubmit", () => {
-        const link = wrapper.find("p").find("Link");
-        expect(link).toHaveLength(1);
-        expect(link.find("button").text()).toEqual("change and resubmit");
-        expect(link.prop("to")).toEqual("/some-specific-user/submit");
+        const a = wrapper.find("p").find("a");
+        expect(a).toHaveLength(1);
+        expect(a.text()).toEqual(
+            expect.stringMatching(/^https?:\/\/.+\/some-specific-user\/submit/)
+        );
+        expect(a.prop("href")).toEqual(
+            expect.stringMatching(/^https?:\/\/.+\/some-specific-user\/submit/)
+        );
     });
 });
