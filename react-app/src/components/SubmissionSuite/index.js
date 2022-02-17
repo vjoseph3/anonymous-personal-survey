@@ -4,8 +4,7 @@ import Form from "./Form";
 import GoodbyePage from "./GoodbyePage";
 import NotFoundPage from "../NotFoundPage";
 import fetch from "node-fetch";
-
-const API_URL = "http://localhost:3000/api/v1";
+import { API_URL } from "../../constants";
 
 /**
  * Submits the form to the REST API
