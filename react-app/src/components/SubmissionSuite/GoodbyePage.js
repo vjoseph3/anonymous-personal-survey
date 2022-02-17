@@ -1,17 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { FRONTEND_URL } from "../../constants";
 
 const GoodbyePage = ({ submitterId }) => {
+    const resubmitUrl = `${FRONTEND_URL}/${submitterId}/submit`;
     return (
         <>
             <h2 id="thanks">Thank you for your submission!</h2>
             <p id="instructions">
-                You can safely close this window, or
-                <Link to={`/${submitterId}/submit`}>
-                    <button style={{ margin: "5px" }}>
-                        change and resubmit
-                    </button>
-                </Link>
+                You can update your submission at any time at {}
+                <a href={resubmitUrl}>{resubmitUrl}</a>
             </p>
         </>
     );
