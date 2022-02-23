@@ -140,42 +140,6 @@ describe("<Form />", () => {
             expect(toJson(wrapper)).toMatchSnapshot();
         });
     });
-    describe("Basic page layout", () => {
-        beforeAll(() => {
-            jest.resetModules();
-            jest.mock(
-                "../../survey.json",
-                () => [
-                    {
-                        component: "Text",
-                        props: {
-                            prompt: "This is a text question.",
-                        },
-                    },
-                    {
-                        component: "MultipleChoice",
-                        props: {
-                            prompt: "This is a multiple choice question.",
-                            choices: ["one", "two", "three"],
-                        },
-                    },
-                ],
-                { virtual: true }
-            );
-            Form = require("./Form").default;
-            wrapper = new StatefulMock(
-                () => shallow(<Form />),
-                mockUseState
-            ).render();
-        });
-        it("matches the snapshot", () => {
-            expect(toJson(wrapper)).toMatchSnapshot();
-        });
-        it("renders a Submit button and a Submit Anonymously button", () => {
-            expect(wrapper.find("SubmitButton")).toHaveLength(1);
-            expect(wrapper.find("SubmitAnonButton")).toHaveLength(1);
-        });
-    });
     describe("State management", () => {
         let stateful;
         let text;
