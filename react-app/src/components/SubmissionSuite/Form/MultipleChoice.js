@@ -32,6 +32,16 @@ const MultipleChoice = ({ prompt, choices, required, data }) => {
                 key={choice}
                 onClick={() => handleChoice(choice)}
                 className={isSelected ? "button selected" : "button deselected"}
+                style={{
+                    display: "inline-block",
+                    textAlign: "center",
+                    borderRadius: "3px",
+                    border: "1px double",
+                    margin: 3 - (isSelected && 2) + "px",
+                    padding: 2 + (isSelected && 2) + "px",
+                    minWidth: 115 + (isSelected && 4) + "px",
+                    backgroundColor: isSelected && "#9df",
+                }}
             >
                 <span>{choice}</span>
             </button>
